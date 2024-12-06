@@ -1,0 +1,65 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gardener-local-provider-secret
+  namespace: default
+type: Opaque
+# usually we would put cloud provider credentials into this secret, but it isn't needed for provider-local as no such
+# credentials exist. Hence, we just create an empty secret
+---
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: Cluster
+metadata:
+  name: capi-test
+  namespace: default
+spec:
+  controlPlaneRef:
+    apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+    kind: GardenerCluster
+    name: capi-test
+  infrastructureRef:
+    apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+    kind: GardenerCluster
+    name: capi-test
+---
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+kind: GardenerCluster
+metadata:
+  name: capi-test
+  namespace: default
+spec:
+  shootSpec:
+    apiVersion: core.gardener.cloud/v1beta1
+    kind: Shoot
+    spec:
+      cloudProfile:
+        name: local
+      secretBindingName: local
+      region: local
+      networking:
+        type: calico
+        nodes: 10.10.0.0/16
+      provider:
+        type: local
+        workers:
+        - name: local
+          machine:
+            type: local
+          cri:
+            name: containerd
+          minimum: 1
+          maximum: 2
+          maxSurge: 1
+          maxUnavailable: 0
+      kubernetes:
+        kubelet:
+          seccompDefault: true
+          serializeImagePulls: false
+          registryPullQPS: 10
+          registryBurst: 20
+          protectKernelDefaults: true
+          streamingConnectionIdleTimeout: 5m
+  providerSecretRef:
+    name: gardener-local-provider-secret
+    namespace: default

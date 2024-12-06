@@ -1,12 +1,5 @@
-# Adds namespace to all resources.
-namespace: cluster-api-provider-gardener-system
-
-# Value of this field is prepended to the
-# names of all resources, e.g. a deployment named
-# "wordpress" becomes "alices-wordpress".
-# Note that it should also match with the prefix (text before '-') of the namespace
-# field above.
-namePrefix: cluster-api-provider-gardener-
+namespace: capga-system
+namePrefix: capga-
 
 # Labels to add to all resources and selectors.
 #labels:
@@ -15,7 +8,8 @@ namePrefix: cluster-api-provider-gardener-
 #    someName: someValue
 
 resources:
-#- ../crd
+- namespace.yaml
+- ../crd
 - ../rbac
 - ../manager
 # [WEBHOOK] To enable webhook, uncomment all the sections with [WEBHOOK] prefix including the one in

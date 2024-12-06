@@ -1,3 +1,5 @@
+# THIS IS ONLY A POC THAT RESULTED FROM THE GARDENER HACKATHON BY NOW.
+
 # cluster-api-provider-gardener
 // TODO(user): Add simple overview of use/purpose
 
@@ -6,8 +8,15 @@
 
 ## Getting Started
 
+- Start the gardener local lab
+- export the KUBECONFIG of the gardener local kind cluster
+- `cat $KUBECONFIG > .gardener.kubeconfig` and edit the server name to `https://kubernetes.default.svc.cluster.local`
+- `export GARDENER_KUBECONFIG=.gardener.kubeconfig`
+- Then deploy the cluster-api with `clusterctl init` and this project's controller through `make push-to-gardener-local`
+- Deploy the example with `kubectl apply -f config/samples/example.yaml`
+
 ### Prerequisites
-- go version v1.22.0+
+- go version v1.23.0+
 - docker version 17.03+.
 - kubectl version v1.11.3+.
 - Access to a Kubernetes v1.11.3+ cluster.
@@ -111,4 +120,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
