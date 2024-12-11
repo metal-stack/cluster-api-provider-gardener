@@ -65,13 +65,13 @@ spec:
                 - name
                 - namespace
                 type: object
-              shootSpec:
-                description: ShootSpec is the spec for the Gardener shoot cluster.
+              shoot:
+                description: Shoot is the spec for the Gardener shoot cluster.
                 type: object
                 x-kubernetes-preserve-unknown-fields: true
             required:
             - providerSecretRef
-            - shootSpec
+            - shoot
             type: object
           status:
             description: GardenerClusterStatus defines the observed state of GardenerCluster.

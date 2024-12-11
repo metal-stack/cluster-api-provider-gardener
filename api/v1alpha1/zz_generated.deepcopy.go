@@ -104,7 +104,7 @@ func (in *GardenerClusterList) DeepCopyObject() runtime.Object {
 func (in *GardenerClusterSpec) DeepCopyInto(out *GardenerClusterSpec) {
 	*out = *in
 	out.ControlPlaneEndpoint = in.ControlPlaneEndpoint
-	in.ShootSpec.DeepCopyInto(&out.ShootSpec)
+	in.Shoot.DeepCopyInto(&out.Shoot)
 	out.ProviderSecretRef = in.ProviderSecretRef
 }
 

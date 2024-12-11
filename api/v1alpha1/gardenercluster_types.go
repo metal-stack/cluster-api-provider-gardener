@@ -43,8 +43,8 @@ type GardenerClusterSpec struct {
 	// +optional
 	ControlPlaneEndpoint APIEndpoint `json:"controlPlaneEndpoint"`
 
-	// ShootSpec is the spec for the Gardener shoot cluster.
-	ShootSpec runtime.RawExtension `json:"shootSpec"`
+	// Shoot is the spec for the Gardener shoot cluster.
+	Shoot runtime.RawExtension `json:"shoot"`
 
 	// ProviderSecretRef is a reference to a secret that contains provider credentials for the shoot.
 	ProviderSecretRef SecretRef `json:"providerSecretRef"`

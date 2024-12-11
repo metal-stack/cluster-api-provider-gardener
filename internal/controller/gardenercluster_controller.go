@@ -170,7 +170,7 @@ func (r *GardenerClusterReconciler) SetupWithManager(mgr ctrl.Manager) error {
 
 func (r *clusterReconciler) reconcile() error {
 	var rawShoot gardencorev1beta1.Shoot
-	err := r.decoder.DecodeInto(r.infraCluster.Spec.ShootSpec.Raw, &rawShoot)
+	err := r.decoder.DecodeInto(r.infraCluster.Spec.Shoot.Raw, &rawShoot)
 	if err != nil {
 		return fmt.Errorf("unable to decode shoot: %w", err)
 	}

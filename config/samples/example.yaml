@@ -29,7 +29,7 @@ metadata:
   name: capi-test
   namespace: default
 spec:
-  shootSpec:
+  shoot:
     apiVersion: core.gardener.cloud/v1beta1
     kind: Shoot
     spec:
